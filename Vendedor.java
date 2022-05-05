@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Vendedor {
+public class Vendedor implements Serializable {
     private String usuario;
     private Inmobiliaria inmobiliaria;
 

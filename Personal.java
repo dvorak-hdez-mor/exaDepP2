@@ -1,4 +1,7 @@
-public class Personal {
+import java.awt.*;
+import java.io.Serializable;
+
+public class Personal implements Serializable {
     private String usuario; // para distinguir entre usuarios con la misma contrasenia
     private String contrasenia;
     private Inmobiliaria inmobiliaria;
