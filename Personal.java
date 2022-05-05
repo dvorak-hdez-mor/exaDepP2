@@ -12,24 +12,12 @@ public class Personal implements Serializable {
         this.inmobiliaria = inmobiliaria;
     }
 
-    Personal(){
-
-    }
-
-    public void altaInmueble(String tipo, String ubicacion, float tamanioArea, float precio, int numCuartos, int numBanios, String descripcion, String foto, float precioLista, boolean status){
-        inmobiliaria.getInmuebles().add(new Inmueble(tipo, ubicacion, tamanioArea, precio, numCuartos, numBanios, descripcion, foto, precioLista, status));
+    public void altaInmueble(String tipo, String ubicacion, float tamanioArea, float precio, int numCuartos, int numBanios, String descripcion, float precioLista, String status){
+        inmobiliaria.getInmuebles().add(new Inmueble(tipo, ubicacion, tamanioArea, precio, numCuartos, numBanios, descripcion, precioLista, status));
     }
 
     public void bajaInmueble(int indice){
         inmobiliaria.getInmuebles().remove(indice);
-    }
-
-    public void modificarInmueble(){ // reemplazar por sus setters (?)
-
-    }
-
-    public void visualizarInmueble(){ // reemplazar por sus getters (?)
-
     }
 
     public String getUsuario() {

@@ -1,4 +1,8 @@
-public class Inmueble {
+import jdk.jshell.Snippet;
+
+import java.io.Serializable;
+
+public class Inmueble implements Serializable {
     private String tipo;
     private String ubicacion;
     private float tamanioArea;
@@ -6,11 +10,10 @@ public class Inmueble {
     private int numCuartos;
     private int numBanios;
     private String descripcion;
-    private String foto;
     private float precioLista;
-    private boolean status;
+    private String status; // Apartado, vendido, cuotas, disponible
 
-    public Inmueble(String tipo, String ubicacion, float tamanioArea, float precio, int numCuartos, int numBanios, String descripcion, String foto, float precioLista, boolean status) {
+    public Inmueble(String tipo, String ubicacion, float tamanioArea, float precio, int numCuartos, int numBanios, String descripcion, float precioLista, String status) {
         this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.tamanioArea = tamanioArea;
@@ -18,7 +21,6 @@ public class Inmueble {
         this.numCuartos = numCuartos;
         this.numBanios = numBanios;
         this.descripcion = descripcion;
-        this.foto = foto;
         this.precioLista = precioLista;
         this.status = status;
     }
@@ -79,14 +81,6 @@ public class Inmueble {
         this.descripcion = descripcion;
     }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
     public float getPrecioLista() {
         return precioLista;
     }
@@ -95,11 +89,23 @@ public class Inmueble {
         this.precioLista = precioLista;
     }
 
-    public boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String toString(){
+        return "Tipo: "+tipo+"\n"+
+                "Ubicacion: "+ubicacion+"\n"+
+                "Tamaño del area: "+tamanioArea+" mts² \n"+
+                "Precio: $"+precio+"\n"+
+                "Numero de cuartos: "+numCuartos+"\n"+
+                "Numero de baños: "+numBanios+"\n"+
+                "Descripcion: "+descripcion+"\n"+
+                "Precio de lista: "+precioLista+"\n"+
+                "Status: "+status;
     }
 }

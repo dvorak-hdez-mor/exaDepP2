@@ -12,26 +12,25 @@ public class ModeloInmoviliaria {
         this.inmobiliaria = inmobiliaria;
         entrada = null;
         salida = null;
-        // aqui se inicializa el metodo para la lectura del archivo
         this.fichero = fichero;
         this.leerArchivo();
     }
 
-    // pendiente hacer metodos para la lectura del archivo de usuarios y de la inmobiliaria
-
     public void leerArchivo(){
         try {
             this.entrada = new ObjectInputStream(new FileInputStream(this.fichero));
-            Object empleado;
+            Object objeto;
 
-            empleado = this.entrada.readObject(); // Primera lectura
+            objeto = this.entrada.readObject(); // Primera lectura
 
-            while (empleado != null){
-                if (empleado instanceof Vendedor)
-                    this.inmobiliaria.altaVendedor((Vendedor) empleado);
-                if (empleado instanceof Personal)
-                    this.inmobiliaria.altaPersonal((Personal) empleado);
-                empleado = this.entrada.readObject();
+            while (objeto != null){
+                if (objeto instanceof Vendedor)
+                    this.inmobiliaria.altaVendedor((Vendedor) objeto);
+                else if (objeto instanceof Personal)
+                    this.inmobiliaria.altaPersonal((Personal) objeto);
+                else if (objeto instanceof Inmueble)
+                    this.inmobiliaria.getInmuebles().add((Inmueble) objeto);
+                objeto = this.entrada.readObject();
             }
 
         } catch (FileNotFoundException err){
@@ -59,6 +58,10 @@ public class ModeloInmoviliaria {
 
             for (Vendedor v: inmobiliaria.getVendedores()){
                 salida.writeObject(v);
+            }
+
+            for (Inmueble inm: inmobiliaria.getInmuebles()){
+                salida.writeObject(inm);
             }
 
         } catch (FileNotFoundException err){
