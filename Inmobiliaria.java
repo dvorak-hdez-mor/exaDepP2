@@ -29,8 +29,9 @@ public class Inmobiliaria implements Serializable {
     }
 
     public boolean logearse(String usuario, String contrasenia){
+
         for (Personal p: personal){
-            if (p.getUsuario() == usuario && p.getContrasenia() == contrasenia)
+            if (p.getUsuario().equals(usuario) && p.getContrasenia().equals(contrasenia))
                 return true;
         }
         return false;

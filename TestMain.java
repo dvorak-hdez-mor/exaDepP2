@@ -4,8 +4,10 @@ public class TestMain {
     public static void main(String[] args) {
         // Leer y guardar usuarios e inmuebles
         Inmobiliaria via = new Inmobiliaria();
-
         ModeloInmoviliaria modelo = new ModeloInmoviliaria(via, "datos.bin");
+
+        InmobiliariaVista vista = new InmobiliariaVista(modelo);
+        vista.setVisible(true);
 
         // controlador (se activa con los eventos de la vista)
         // Personal p1 = new Personal("mahm","aaa", modelo.getInmobiliaria());
@@ -18,7 +20,7 @@ public class TestMain {
         // via.getPersonal().get(0).altaInmueble("Urbano", "Puebla", 100.3f, 100000, 4, 2, "bonito", "foto", 99999, "Disponible");
 
         // logearse en el programa
-        // System.out.println(modelo.getInmobiliaria().logearse("mahm", "aaaa"));
+        System.out.println(modelo.getInmobiliaria().logearse("mahm", "aaa"));
 
         // dar de baja a personal (?)
         //modelo.getInmobiliaria().bajaPersonal(p1);
@@ -39,6 +41,7 @@ public class TestMain {
 
         // Lectura de archivo y vista previa
         // Lectura de Personal
+
         System.out.println("Personal");
         for (Personal p: modelo.getInmobiliaria().getPersonal()){
             System.out.println(p.getUsuario());
@@ -58,7 +61,7 @@ public class TestMain {
             System.out.println(inm);
             System.out.println();
         }
-
+        /*
         // Escribir / actualizar archivo
         // modelo.escribirArchivo();
 
@@ -70,6 +73,7 @@ public class TestMain {
         ArrayList<Float> pagos = new ArrayList<Float>();
         pagos = modelo.getInmobiliaria().getVendedores().get(0).cotizarPagos(costo, 20000, pagos);
         modelo.getInmobiliaria().getVendedores().get(0).imprimirMensualidades(pagos, "pagos.txt");
+         */
     }
 
     // TEST: Init datos iniciales hacia archivo
