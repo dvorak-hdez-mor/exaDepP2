@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 public class ModeloInmoviliaria {
 
-    Inmobiliaria inmobiliaria;
-    String fichero;
-    ObjectInputStream entrada;
-    ObjectOutputStream salida;
+    private Inmobiliaria inmobiliaria;
+    private String fichero;
+    private ObjectInputStream entrada;
+    private ObjectOutputStream salida;
 
     ModeloInmoviliaria(Inmobiliaria inmobiliaria, String fichero){
         this.inmobiliaria = inmobiliaria;
@@ -25,9 +25,9 @@ public class ModeloInmoviliaria {
 
             while (objeto != null){
                 if (objeto instanceof Vendedor)
-                    this.inmobiliaria.altaVendedor((Vendedor) objeto);
+                    this.inmobiliaria.setVendedor((Vendedor) objeto);
                 else if (objeto instanceof Personal)
-                    this.inmobiliaria.altaPersonal((Personal) objeto);
+                    this.inmobiliaria.setPersonal((Personal) objeto);
                 else if (objeto instanceof Inmueble)
                     this.inmobiliaria.getInmuebles().add((Inmueble) objeto);
                 objeto = this.entrada.readObject();
@@ -50,15 +50,12 @@ public class ModeloInmoviliaria {
 
     public void escribirArchivo(){
         try {
+            this.salida = null;
             this.salida = new ObjectOutputStream(new FileOutputStream(this.fichero));
 
-            for (Personal p: inmobiliaria.getPersonal()){
-                salida.writeObject(p);
-            }
+            salida.writeObject(inmobiliaria.getPersonal());
 
-            for (Vendedor v: inmobiliaria.getVendedores()){
-                salida.writeObject(v);
-            }
+            salida.writeObject(inmobiliaria.getVendedor());
 
             for (Inmueble inm: inmobiliaria.getInmuebles()){
                 salida.writeObject(inm);

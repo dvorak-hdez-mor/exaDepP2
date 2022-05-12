@@ -4,7 +4,7 @@ public class ContraseniaIncorrectaException extends Exception {
     }
 
     ContraseniaIncorrectaException(){
-        this("El usuario o la contraseña son incorrectos.");
+        this("La contraseña es incorrecta.");
     }
 
 }

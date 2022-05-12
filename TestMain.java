@@ -3,7 +3,14 @@ import java.util.ArrayList;
 public class TestMain {
     public static void main(String[] args) {
         // Leer y guardar usuarios e inmuebles
-        Inmobiliaria via = new Inmobiliaria();
+        Personal p1 = new Personal("aaa");
+        Vendedor v1 = new Vendedor();
+
+        Inmobiliaria via = new Inmobiliaria(p1, v1);
+
+        p1.setInmobiliaria(via);
+        v1.setInmobiliaria(via);
+
         ModeloInmoviliaria modelo = new ModeloInmoviliaria(via, "datos.bin");
 
         InmobiliariaVista vista = new InmobiliariaVista(modelo);
@@ -20,7 +27,7 @@ public class TestMain {
         // via.getPersonal().get(0).altaInmueble("Urbano", "Puebla", 100.3f, 100000, 4, 2, "bonito", "foto", 99999, "Disponible");
 
         // logearse en el programa
-        System.out.println(modelo.getInmobiliaria().logearse("mahm", "aaa"));
+        System.out.println(modelo.getInmobiliaria().logearse("aaa"));
 
         // dar de baja a personal (?)
         //modelo.getInmobiliaria().bajaPersonal(p1);
@@ -31,10 +38,17 @@ public class TestMain {
         // ArrayList<Float> pagos = new ArrayList<Float>();
         // pagos = v1.cotizarPagos(80000, 20000, pagos);
 
-        System.out.println("");
+        // alta inmueble (nuevo)
+        //Inmueble inmueble1 = new Inmueble("Urbano", "Puebla", 10.3f, 1000, 4, 3, "bonito", 999, "Disponible");
+        //modelo.getInmobiliaria().addInmueble(inmueble1);
+        //modelo.escribirArchivo();
 
         // baja de inmueble
         //p1.bajaInmueble(0);
+
+        // baja inmueble (nuevo)
+        //modelo.getInmobiliaria().eliminarInmueble(1);
+        //System.out.println("");
 
         // TEST: Carga de datos
         // cargaDatos(modelo);
@@ -42,19 +56,8 @@ public class TestMain {
         // Lectura de archivo y vista previa
         // Lectura de Personal
 
-        System.out.println("Personal");
-        for (Personal p: modelo.getInmobiliaria().getPersonal()){
-            System.out.println(p.getUsuario());
-            System.out.println(p.getContrasenia());
-            System.out.println();
-        }
-
-        // Lectura de Vendedores
-        System.out.println("Vendedores");
-        for (Vendedor v: modelo.getInmobiliaria().getVendedores()){
-            System.out.println(v.getUsuario());
-            System.out.println();
-        }
+        System.out.println("Personal contrasenia");
+        System.out.println(modelo.getInmobiliaria().getPersonal() + "\n");
 
         System.out.println("Inmuebles");
         for (Inmueble inm: modelo.getInmobiliaria().getInmuebles()) {
@@ -63,7 +66,7 @@ public class TestMain {
         }
         /*
         // Escribir / actualizar archivo
-        // modelo.escribirArchivo();
+        //modelo.escribirArchivo();
 
         // Despues de la venta, sobreescribir el archivo con el nuevo status del inmueble
 
@@ -78,20 +81,14 @@ public class TestMain {
 
     // TEST: Init datos iniciales hacia archivo
     public static void cargaDatos(ModeloInmoviliaria modelo){
-        Personal p1 = new Personal("mahm","aaa", modelo.getInmobiliaria());
-        Personal p2 = new Personal("nvc","eee", modelo.getInmobiliaria());
-        Vendedor v1 = new Vendedor( "edm", modelo.getInmobiliaria());
-        Vendedor v2 = new Vendedor( "rhg", modelo.getInmobiliaria());
-        Vendedor v3 = new Vendedor( "whm", modelo.getInmobiliaria());
+        Personal p1 = new Personal("aaa");
+        Vendedor v1 = new Vendedor();
 
-        modelo.getInmobiliaria().altaPersonal(p1);
-        modelo.getInmobiliaria().altaPersonal(p2);
-        modelo.getInmobiliaria().altaVendedor(v1);
-        modelo.getInmobiliaria().altaVendedor(v2);
-        modelo.getInmobiliaria().altaVendedor(v3);
+        p1.setInmobiliaria(modelo.getInmobiliaria());
+        v1.setInmobiliaria(modelo.getInmobiliaria());
 
-        modelo.getInmobiliaria().getPersonal().get(0).altaInmueble("Urbano", "Puebla", 100.3f, 100000, 4, 2, "bonito", 99999, "Disponible");
-        modelo.getInmobiliaria().getPersonal().get(1).altaInmueble("Urbano", "Puebla", 220.3f, 250000, 5, 3, "bonito", 99999, "Disponible");
+        modelo.getInmobiliaria().getPersonal().altaInmueble("Urbano", "Puebla", 100.3f, 100000, 4, 2, "bonito", 99999, "Disponible");
+        modelo.getInmobiliaria().getPersonal().altaInmueble("Urbano", "Puebla", 220.3f, 250000, 5, 3, "bonito", 99999, "Disponible");
         modelo.escribirArchivo();
     }
 }

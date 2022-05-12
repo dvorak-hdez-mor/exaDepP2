@@ -2,13 +2,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Vendedor implements Serializable {
-    private String usuario;
     private Inmobiliaria inmobiliaria;
     private PrintWriter salidaPagos;
+    private PrintWriter salidaFactura;
 
-    Vendedor(String usuario, Inmobiliaria inmobiliaria){
-        this.usuario = usuario;
-        this.inmobiliaria = inmobiliaria;
+    Vendedor(){
+
     }
 
     public Inmueble visualizar(int identificador){
@@ -48,6 +47,20 @@ public class Vendedor implements Serializable {
         }
     }
 
+    public void imprimirFactura(Inmueble inmueble, String facturaFichero){
+        try {
+            salidaFactura = new PrintWriter(new BufferedWriter(new FileWriter(facturaFichero)));
+
+            salidaFactura.println("Adquisicion de inmueble por pago inmediato");
+            salidaFactura.println(inmueble);
+
+        } catch (IOException err){
+            System.out.println("Error al crear el archivo.");
+        } finally {
+            salidaFactura.close(); // cerrando stream
+        }
+    }
+
     public void vender(int identificador){ // que significa status?
         this.inmobiliaria.getInmuebles().get(identificador).setStatus("Vendido");
     }
@@ -60,11 +73,11 @@ public class Vendedor implements Serializable {
         this.inmobiliaria.getInmuebles().get(identificador).setStatus("Cuotas");
     }
 
-    public String getUsuario() {
-        return usuario;
+    public Inmobiliaria getInmobiliaria() {
+        return inmobiliaria;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setInmobiliaria(Inmobiliaria inmobiliaria) {
+        this.inmobiliaria = inmobiliaria;
     }
 }
